@@ -1,0 +1,191 @@
+const TStream = require('t-model')
+{{#hasInterface}}
+const TafProtocolClient = require('t-rpc/lib/protocols/taf/client')
+const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = require('t-rpc/lib/util/rpc-error')
+{{/hasInterface}}
+{{#hasKey}}
+const md5 = require('md5')
+{{/hasKey}}
+
+{{#includes}}
+let { {{{moduleStructNames}}} } = require('{{{modulePath}}}').{{{moduleName}}}
+{{/includes}}
+{{#modules}}
+{{#structs}}
+class {{name}} extends TStream.TStruct {
+  static parse (value) {
+    return Object.assign({}, {
+      {{#fields}}
+      {{{name}}}: {{{defaultValue}}},
+      {{/fields}}
+    }, value)
+  }
+  static readFrom (is, tBuffer) {
+    {{#fields}}
+    let {{{name}}} = ({{{tName}}}).read(is, {{{tag}}}, {{#require}}true{{/require}}{{^require}}false{{/require}})
+    {{/fields}}
+    return new {{name}}({
+      {{#fields}}{{{name}}}, {{/fields}}
+    }).valueOf()
+  }
+  constructor (value) {
+    super(value)
+
+    {{#fields}}
+    this._t_{{{name}}} = new ({{{tName}}})(this._value.{{{name}}})
+    {{/fields}}
+  }
+
+  {{#fields}}
+  get {{{name}}} () {
+    return this._t_{{{name}}}.valueOf()
+  }
+  {{/fields}}
+
+  {{#fields}}
+  set {{{name}}} (value) {
+    this._t_{{{name}}} = new ({{{tName}}})(value)
+  }
+  {{/fields}}
+
+  writeTo (os, tBuffer) {
+    {{#fields}}
+    this._t_{{{name}}}.write(os, {{{tag}}})
+    {{/fields}}
+  }
+
+  valueOf () {
+    return {
+      {{#fields}}
+      {{{name}}}: this._t_{{{name}}}.valueOf(),
+      {{/fields}}
+    }
+  }
+
+  {{#key}}
+  keyOf () {
+    return md5([
+    {{#items}}
+      this._t_{{{.}}}.keyOf(),
+    {{/items}}
+    ].join('__key__'))
+  }
+  {{/key}}
+}
+{{/structs}}
+
+{{#interfaces}}
+class {{{name}}}Proxy {
+  static get Protocol () {
+    return TafProtocolClient
+  }
+  constructor () {
+    this._name = undefined
+    this._objectProxy = undefined
+  }
+  setTimeout (value) {
+    this._objectProxy.timeout = value
+  }
+  getTimeout () {
+    return this._objectProxy.timeout
+  }
+  {{#methods}}
+  {{{name}}} ({{#inArgs}}{{{name}}}, {{/inArgs}}...args) {
+    let _encode = () => {
+      let os = new TStream.TOutputStream()
+      {{#inArgs}}
+      new ({{{tName}}})({{{name}}}).write(os, {{{tag}}})
+      {{/inArgs}}
+      return os.tBuffer.buffer
+    }
+    let _decode = rpcResult => {
+      try {
+        let response = { arguments: {} }
+        let is = new TStream.TInputStream(new TStream.TBuffer(rpcResult.responseMessage.responsePacket.sBuffer))
+        response.costtime = rpcResult.costTime
+        response.return = {{returnArg.tName}}.read(is, 0, true)
+        {{#outArgs}}
+        response.arguments.{{{name}}} = {{{tName}}}.read(is, {{{tag}}}, true)
+        {{/outArgs}}
+        return { request: rpcResult.requestMessage, response }
+      } catch (error) {
+        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+      }
+    }
+    let _error = rpcError => {
+      let code = rpcError.responseMessage ? rpcError.responseMessage.code : -999
+      let message = rpcError.responseMessage ? rpcError.responseMessage.message : rpcError.message 
+      throw new RpcError(code, message, rpcError.requestMessage, rpcError.responseMessage, rpcError.costTime, rpcError.endpointInfo)
+    }
+    return this._objectProxy.invoke('{{{name}}}', _encode(), args.length > 0 ? args[0] : undefined).then(_decode, _error)
+  }
+  {{/methods}}
+}
+
+class {{{name}}}Servant {
+  doRequest (requestMessage) {
+    let { requestId, funcName, appBuffer } = requestMessage
+    let is = new TStream.TInputStream(new TStream.TBuffer(appBuffer))
+    let os = new TStream.TOutputStream()
+    switch (funcName) {
+      {{#methods}}
+      case '{{name}}': {
+        {{#inArgs}}
+        let {{name}} = {{{tName}}}.read(is, {{{tag}}}, true)
+        {{/inArgs}}
+        return this.{{name}}({{#inArgs}}{{name}}, {{/inArgs}}).then(ret => {
+          new ({{{returnArg.tName}}})(ret.return).write(os, 0)
+          {{#outArgs}}
+          new ({{{tName}}})(ret.{{{name}}}).write(os, {{{tag}}})
+          {{/outArgs}}
+          let responseMessage = { 
+            requestId,
+            code: 0,
+            message: 'success',
+            responsePacket: {
+              sBuffer: os.tBuffer.buffer
+            }
+          }
+          return Promise.resolve({ responseMessage })
+        }).catch(error => {
+          let code = error.code ? error.code : -999
+          let message = error.message || 'unknown error'
+          let rpcError = new RpcError(code, message, requestMessage, null, 0, null)
+          return Promise.reject(rpcError)
+        })
+      }
+      {{/methods}}
+      default:
+        return Promise.reject(new ServerFuncNotFoundError(funcName + ' not found', requestMessage, null, 0, null))
+    }
+  }
+  {{#methods}}
+  {{{name}}} ({{#inArgs}}{{name}}, {{/inArgs}}) {
+    let ret = {}
+    ret.return = {{{returnArg.defaultValue}}}
+    {{#outArgs}}
+    ret.{{{name}}} = {{{defaultValue}}}
+    {{/outArgs}}
+    return Promise.resolve(ret)
+  }
+  {{/methods}}
+}
+{{/interfaces}}
+{{/modules}}
+
+{{#includes}}
+{{#moduleStructNames}}
+exports.{{{moduleName}}} = exports.{{{moduleName}}} || {}
+exports.{{{moduleName}}}.{{{.}}} = {{{.}}}
+{{/moduleStructNames}}
+{{/includes}}
+{{#modules}}
+exports.{{{name}}} = exports.{{{name}}} || {}
+{{#structs}}
+exports.{{{moduleName}}}.{{{name}}} = {{{name}}}
+{{/structs}}
+{{#interfaces}}
+exports.{{{moduleName}}}.{{{name}}}Proxy = {{{name}}}Proxy
+exports.{{{moduleName}}}.{{{name}}}Servant = {{{name}}}Servant
+{{/interfaces}}
+{{/modules}}

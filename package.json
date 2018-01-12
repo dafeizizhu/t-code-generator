@@ -17,8 +17,22 @@
   ],
   "author": "maizhiying",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dafeizizhu/t-code-generator/issues"
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.12.2",
+    "jison": "^0.4.18",
+    "mustache": "^2.3.0",
+    "prettyjson": "^1.2.1",
+    "standard": "^10.0.3",
+    "strip-json-comments": "^2.0.1"
   },
-  "homepage": "https://github.com/dafeizizhu/t-code-generator#readme"
+  "standard": {
+    "ignore": [
+      "taf.js"
+    ]
+  },
+  "homepage": "https://github.com/dafeizizhu/t-code-generator#readme",
+  "devDependencies": {
+    "mocha": "^4.1.0"
+  }
 }

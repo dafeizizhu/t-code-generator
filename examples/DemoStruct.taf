@@ -1,0 +1,19 @@
+module Demo {
+  struct DemoStruct
+  {
+    0 require int intValue;
+    1 require string stringValue;
+    2 require float floatValue;
+    3 require double doubleValue;
+    4 optional vector<string> listValue;
+    5 optional map<int, string> mapValue;
+    6 require char charValue;
+    7 require short shortValue;
+    8 require long long longlongValue;
+    9 require unsigned char ucharValue;
+    10 require unsigned short ushortValue;
+    11 require unsigned int uintValue;
+    12 require vector<byte> bytesValue;
+  };
+  key[DemoStruct, intValue, stringValue, floatVaule, doubeValue, listValue, mapValue, charValue, shortValue, longlongValue, ucharValue, ushortValue, uintValue];
+};

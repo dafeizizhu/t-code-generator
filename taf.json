@@ -1,0 +1,115 @@
+{
+  "comment": "Taf Parser",
+  "lex": {
+    "rules": [
+      ["\\s+",                  "/* skip whitespace */"],
+      ["long\\slong\\s",        "return 'LONGLONG'"],
+      ["unsigned\\s",           "return 'UNSIGNED'"],
+      ["module\\s",             "return 'MODULE'"],
+      ["struct\\s",             "return 'STRUCT'"],
+      ["require\\s",            "return 'REQUIRE'"],
+      ["optional\\s",           "return 'OPTIONAL'"],
+      ["interface\\s",          "return 'INTERFACE'"],
+      ["#include\\s",           "return 'INCLUDE'"],
+      ["out\\s",                "return 'OUT'"],
+      ["key\\[",                "return 'KEY'"],
+      ["vector<",               "return 'VECTOR'"],
+      ["map<",                  "return 'MAP'"],
+      ["[0-9]+",                "return 'NATLITERAL'"],
+      ["[a-zA-Z][a-zA-Z0-9]*",  "return 'ID'"],
+      ["{",                     "return 'LBRACE'"],
+      ["}",                     "return 'RBRACE'"],
+      ["\\[",                   "return 'LSBRACE'"],
+      ["\\]",                   "return 'RSBRACE'"],
+      ["\\(",                   "return 'LPAREN'"],
+      ["\\)",                   "return 'RPAREN'"],
+      [";",                     "return 'SEMICOLON'"],
+      ["<",                     "return 'LT'"],
+      [">",                     "return 'GT'"],
+      ["=",                     "return 'EQUAL'"],
+      [",",                     "return 'COMMA'"],
+      ["#",                     "return 'HASHTAG'"],
+      ["\"",                    "return 'QUOTES'"],
+      ["[^\"]+",                "return 'WORDS'"],
+      ["$",                     "return 'EOF'"]
+    ]
+  },
+  "operators": [
+  ],
+  "bnf": {
+    "expressions": [
+      ["content EOF", "return $$"]
+    ],
+    "content": [
+      ["include", "$$ = [$1]"],
+      ["module SEMICOLON", "$$ = [$1]"],
+      ["include content", "$$ = [$1].concat($2)"]
+    ],
+    "include": [
+      ["INCLUDE QUOTES WORDS QUOTES", "$$ = { type: 'include', path: $3 }"]
+    ],
+    "module": [
+      ["MODULE ID LBRACE moduleContent RBRACE", "$$ = { type: 'module', name: $2, content: $4 }"]
+    ],
+    "moduleContent": [
+      ["struct SEMICOLON", "$$ = [$1]"],
+      ["interface SEMICOLON", "$$ = [$1]"],
+      ["key SEMICOLON", "$$ = [$1]"],
+      ["struct SEMICOLON moduleContent", "$$ = [$1].concat($3)"],
+      ["interface SEMICOLON moduleContent", "$$ = [$1].concat($3)"],
+      ["key SEMICOLON moduleContent", "$$ = [$1].concat($3)"]
+    ],
+    "struct": [
+      ["STRUCT ID LBRACE fields RBRACE", "$$ = { type: 'struct', name: $2, fields: $4 }"]
+    ],
+    "fields": [
+      ["field SEMICOLON", "$$ = [$1]"],
+      ["field SEMICOLON fields", "$$ = [$1].concat($3)"]
+    ],
+    "field": [
+      ["NATLITERAL isRequire dataType ID", "$$ = { tag: $1, require: $2, dataType: $3, name: $4 }"],
+      ["NATLITERAL isRequire dataType ID EQUAL constant", "$$ = { tag: $1, require: $2, dataType: $3, name: $4, defaultValue: $6 }"]
+    ],
+    "interface": [
+      ["INTERFACE ID LBRACE methods RBRACE", "$$ = { type: 'interface', name: $2, methods: $4 }"]
+    ],
+    "methods": [
+      ["method SEMICOLON", "$$ = [$1]"],
+      ["method SEMICOLON methods", "$$ = [$1].concat($3)"]
+    ],
+    "method": [
+      ["dataType ID LPAREN args RPAREN", "$$ = { returnDataType: $1, name: $2, args: $4 }"]
+    ],
+    "dataType": [
+      ["LONGLONG", "$$ = 'longlong'"],
+      ["ID", "$$ = $1"],
+      ["UNSIGNED ID", "$$ = 'u' + $2"],
+      ["VECTOR dataType GT", "$$ = { name: 'vector', proto: $2 }"],
+      ["MAP dataType COMMA dataType GT", "$$ = { name: 'map', kproto: $2, vproto: $4 }"]
+    ],
+    "isRequire": [
+      ["REQUIRE", "$$ = true"],
+      ["OPTIONAL", "$$ = false"]
+    ],
+    "arg": [
+      ["dataType ID", "$$ = { dataType: $1, name: $2 }"],
+      ["OUT dataType ID", "$$ = { out: true, dataType: $2, name: $3 }"]
+    ],
+    "args": [
+      ["arg COMMA args", "$$ = [$1].concat($3)"],
+      ["arg", "$$ = [$1]"]
+    ],
+    "constant": [
+      ["NATLITERAL", "$$ = $1"],
+      ["QUOTES QUOTES", "$$ = ''"],
+      ["QUOTES WORDS QUOTES", "$$ = String($2)"]
+    ],
+    "key": [
+      ["KEY keyItems RSBRACE", "$$ = { type: 'key', items: $2 }"]
+    ],
+    "keyItems": [
+      ["ID", "$$ = [$1]"],
+      ["ID COMMA keyItems", "$$ = [$1].concat($3)"]
+    ]
+  }
+}

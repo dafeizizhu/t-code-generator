@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+const chalk = require('chalk')
+
+console.info(chalk.blue(`
+________________  ___________ ___________________ 
+\\__    ___/  _  \\ \\_   _____/ \\__    ___/\\_____  \\  
+  |    | /  /_\\  \\ |    __)     |    |    /   |   \\ 
+  |    |/    |    \\|     \\      |    |   /    |    \\
+  |____|\\____|__  /\\___  /      |____|   \\_______  /
+                \\/     \\/                        \\/ 
+ _______   ________  ________  ___________     ____. _________
+ \\      \\  \\_____  \\ \\______ \\ \\_   _____/    |    |/   _____/
+ /   |   \\  /   |   \\ |    |  \\ |    __)_     |    |\\_____  \\ 
+/    |    \\/    |    \\|        \\|        \\/\\__|    |/        \\
+\\____|__  /\\_______  /_______  /_______  /\\________/_______  /
+        \\/         \\/        \\/        \\/                  \\/ 
+`))
+
+let commander = require('commander')
+
+commander
+  .version(require('../package.json').version)
+
+  .option('-f, --file <filePath>', 'protocol file')
+  .option('-r, --recursive', 'recursive generate', false)
+  .parse(process.argv)
+
+if (!commander.file) {
+  commander.outputHelp()
+} else {
+  console.info(`[${chalk.blue('INFO')}] file ${commander.file}`)
+  console.info(`[${chalk.blue('INFO')}] recursive ${commander.recursive}`)
+
+  try {
+    require('../lib/gen')(commander.file, !!commander.recursive)
+    console.info(`[${chalk.blue('INFO')}] js file for ${commander.file} generated`)
+  } catch (err) {
+    console.info(`[${chalk.red('ERROR')}] generated failed: ${err.message}`)
+  }
+}

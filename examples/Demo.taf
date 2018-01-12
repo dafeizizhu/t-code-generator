@@ -1,0 +1,70 @@
+#include "./DemoStruct.taf"
+
+module Demo
+{
+  interface DemoF
+  {
+    bool returnBoolMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    char returnCharMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    short returnShortMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    int returnIntMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    long long returnLonglongMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    unsigned char returnUCharMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    unsigned short returnUShortMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    unsigned int returnUIntMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    float returnFloatMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    double returnDoubleMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    string returnStringMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    DemoStruct returnStructMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    vector<byte> returnBytesMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    vector<unsigned char> returnListMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+    map<string, short> returnMapMethod(bool boolArg, int intArg, string stringArg, float floatValue, double doubleValue, vector<int> vectorArg, map<int, string> mapArg, DemoStruct structArg, 
+      char charArg, short shortArg, long long longlongArg, unsigned char ucharArg, unsigned short ushortArg, unsigned int uintArg, vector<byte> bytesArg,
+      out bool outBoolArg, out int outIntArg, out string outStringArg, out float outFloatValue, out double outDoubleValue, out vector<int> outVectorArg, out map<int, string> outMapArg, out DemoStruct outStructArg,
+      out char outCharArg, out short outShortArg, out long long outLonglongArg, out unsigned char outUcharArg, out unsigned short outUshortArg, out unsigned int outUintArg, out vector<byte> outBytesArg);
+
+    map<vector<DemoStruct>, map<string, vector<int>>> complicate(map<map<int, DemoStruct>, vector<int>> inArg, out map<map<vector<string>, DemoStruct>, map<string, vector<map<string, int>>>> outArg);
+  };
+};
