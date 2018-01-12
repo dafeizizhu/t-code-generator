@@ -1,0 +1,24 @@
+{
+  "name": "t-code-generator",
+  "version": "1.0.0",
+  "description": "A Taf protocol proxy/servant generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dafeizizhu/t-code-generator.git"
+  },
+  "keywords": [
+    "taf",
+    "code",
+    "generator"
+  ],
+  "author": "maizhiying",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dafeizizhu/t-code-generator/issues"
+  },
+  "homepage": "https://github.com/dafeizizhu/t-code-generator#readme"
+}
