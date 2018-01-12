@@ -1,4 +1,4 @@
-const TStream = require('t-model')
+const TModel = require('t-model')
 {{#hasInterface}}
 const TafProtocolClient = require('t-rpc/lib/protocols/taf/client')
 const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = require('t-rpc/lib/util/rpc-error')
@@ -12,7 +12,7 @@ let { {{{moduleStructNames}}} } = require('{{{modulePath}}}').{{{moduleName}}}
 {{/includes}}
 {{#modules}}
 {{#structs}}
-class {{name}} extends TStream.TStruct {
+class {{name}} extends TModel.TStruct {
   static parse (value) {
     return Object.assign({}, {
       {{#fields}}
@@ -92,7 +92,7 @@ class {{{name}}}Proxy {
   {{#methods}}
   {{{name}}} ({{#inArgs}}{{{name}}}, {{/inArgs}}...args) {
     let _encode = () => {
-      let os = new TStream.TOutputStream()
+      let os = new TModel.TOutputStream()
       {{#inArgs}}
       new ({{{tName}}})({{{name}}}).write(os, {{{tag}}})
       {{/inArgs}}
@@ -101,7 +101,7 @@ class {{{name}}}Proxy {
     let _decode = rpcResult => {
       try {
         let response = { arguments: {} }
-        let is = new TStream.TInputStream(new TStream.TBuffer(rpcResult.responseMessage.responsePacket.sBuffer))
+        let is = new TModel.TInputStream(new TModel.TBuffer(rpcResult.responseMessage.responsePacket.sBuffer))
         response.costtime = rpcResult.costTime
         response.return = {{returnArg.tName}}.read(is, 0, true)
         {{#outArgs}}
@@ -125,8 +125,8 @@ class {{{name}}}Proxy {
 class {{{name}}}Servant {
   doRequest (requestMessage) {
     let { requestId, funcName, appBuffer } = requestMessage
-    let is = new TStream.TInputStream(new TStream.TBuffer(appBuffer))
-    let os = new TStream.TOutputStream()
+    let is = new TModel.TInputStream(new TModel.TBuffer(appBuffer))
+    let os = new TModel.TOutputStream()
     switch (funcName) {
       {{#methods}}
       case '{{name}}': {
