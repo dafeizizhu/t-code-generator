@@ -110,7 +110,8 @@ class {{{name}}}Proxy {
         {{/outArgs}}
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
