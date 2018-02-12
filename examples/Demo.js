@@ -1,8 +1,8 @@
 const TModel = require('t-model')
 const TRpc = require('t-rpc')
 const TafProtocolClient = TRpc.protocols.taf.Client
-const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = TRpc.TErrors
-const ResponseMessage = TRpc.ResponseMessage
+const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = TRpc.errors
+const { ResponseMessage } = TRpc.messages
 
 let { DemoStruct } = require('./DemoStruct.js').Demo
 
