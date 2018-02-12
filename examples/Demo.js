@@ -1,6 +1,8 @@
 const TModel = require('t-model')
-const TafProtocolClient = require('t-rpc/lib/protocols/taf/client')
-const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = require('t-rpc/lib/util/rpc-error')
+const TRpc = require('t-rpc')
+const TafProtocolClient = TRpc.protocols.taf.Client
+const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = TRpc.TErrors
+const ResponseMessage = TRpc.ResponseMessage
 
 let { DemoStruct } = require('./DemoStruct.js').Demo
 
@@ -61,7 +63,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -114,7 +117,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -167,7 +171,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -220,7 +225,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -273,7 +279,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -326,7 +333,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -379,7 +387,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -432,7 +441,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -485,7 +495,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -538,7 +549,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -591,7 +603,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -644,7 +657,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -697,7 +711,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -750,7 +765,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -803,7 +819,8 @@ class DemoFProxy {
         response.arguments.outBytesArg = TModel.TBytes.read(is, 30, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -828,7 +845,8 @@ class DemoFProxy {
         response.arguments.outArg = TModel.TMap(TModel.TMap(TModel.TList(TModel.TString), DemoStruct), TModel.TMap(TModel.TString, TModel.TList(TModel.TMap(TModel.TString, TModel.TInt32)))).read(is, 2, true)
         return { request: rpcResult.requestMessage, response }
       } catch (error) {
-        throw new ClientDecodeError(error.message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
+        let message = error.responseMessage ? error.responseMessage.message : error.message
+        throw new ClientDecodeError(message, rpcResult.requestMessage, rpcResult.responseMessage, rpcResult.costTime, rpcResult.endpointInfo)
       }
     }
     let _error = rpcError => {
@@ -879,14 +897,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -928,14 +948,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -977,14 +999,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1026,14 +1050,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1075,14 +1101,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1124,14 +1152,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1173,14 +1203,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1222,14 +1254,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1271,14 +1305,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1320,14 +1356,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1369,14 +1407,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1418,14 +1458,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1467,14 +1509,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1516,14 +1560,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1565,14 +1611,16 @@ class DemoFServant {
           new (TModel.TUInt16)(ret.outUshortArg).write(os, 28)
           new (TModel.TUInt32)(ret.outUintArg).write(os, 29)
           new (TModel.TBytes)(ret.outBytesArg).write(os, 30)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999
@@ -1586,14 +1634,16 @@ class DemoFServant {
         return this.complicate(inArg).then(ret => {
           new (TModel.TMap(TModel.TList(DemoStruct), TModel.TMap(TModel.TString, TModel.TList(TModel.TInt32))))(ret.return).write(os, 0)
           new (TModel.TMap(TModel.TMap(TModel.TList(TModel.TString), DemoStruct), TModel.TMap(TModel.TString, TModel.TList(TModel.TMap(TModel.TString, TModel.TInt32)))))(ret.outArg).write(os, 2)
-          let responseMessage = {
+          let responseMessage = new ResponseMessage({
             requestId,
             code: 0,
             message: 'success',
             responsePacket: {
-              sBuffer: os.tBuffer.buffer
+              iMessageType: 0,
+              sBuffer: os.tBuffer.buffer,
+              context: requestMessage.context || {}
             }
-          }
+          })
           return Promise.resolve({ responseMessage })
         }).catch(error => {
           let code = error.code ? error.code : -999

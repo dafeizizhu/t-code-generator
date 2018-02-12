@@ -1,8 +1,9 @@
 const TModel = require('t-model')
 {{#hasInterface}}
-const TafProtocolClient = require('t-rpc/lib/protocols/taf/client')
-const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = require('t-rpc/lib/util/rpc-error')
-const ResponseMessage = require('t-rpc/lib/util/response-message')
+const TRpc = require('t-rpc')
+const TafProtocolClient = TRpc.protocols.taf.Client
+const { RpcError, ClientDecodeError, ServerFuncNotFoundError } = TRpc.errors
+const { ResponseMessage } = TRpc.messages
 {{/hasInterface}}
 {{#hasKey}}
 const md5 = require('md5')
